@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 // const db = require('./config/keys').mongoURI
 
 // connect to mongo
-mongoose.connect(process.env.MONGO_URI || process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI || process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(()=>console.log("connected to mongo"))
 .catch(err=>console.log(err))
 
