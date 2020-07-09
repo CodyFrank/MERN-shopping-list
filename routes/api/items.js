@@ -8,6 +8,7 @@ const Item = require('../../models/Item')
 // @desc gets all items (items index)
 // access public
 router.get('/', (req, res) => {
+    console.log("items get route hit")
     Item.find()
     .sort({ date: -1 })
         .then(items => res.json(items))
