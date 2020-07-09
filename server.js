@@ -3,7 +3,9 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const items = require('./routes/api/items')
 const path = require('path')
-require('dotenv/config')
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 const app = express()
 
@@ -11,12 +13,12 @@ const app = express()
 app.use(bodyParser.json())
 
 // db config
-// const db = require('./config/keys').mongoURI
+const db = require('./config/keys').mongoURI
 
 // connect to mongo
-mongoose.connect(process.env.MONGODB_URI || process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(()=>console.log("connected to mongo"))
-.catch(err=>console.log(err))
+mongoose.connect(process.env.DB_CONNECTION || db, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(()=>console.log("connected to mongo"))
+    .catch(err=>console.log(err))
 
 // use routes
 app.use('/api/items', items)
@@ -32,6 +34,6 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 // create port
-const port = process.env.PORT || 5000
+const port = process.env.PORT ||  5000
 
 app.listen(port, ()=>console.log(`server started on ${port}`))
