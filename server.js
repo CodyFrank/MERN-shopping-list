@@ -4,13 +4,15 @@ const bodyParser = require('body-parser')
 const items = require('./routes/api/items')
 const path = require('path')
 const dotenv = require("dotenv");
-
+const cors = require('cors')
 dotenv.config();
 
 const app = express()
 
 // bodyParser middleware
 app.use(bodyParser.json())
+
+app.use(cors());
 
 // db config
 // const db = require('./config/keys').mongoURI
