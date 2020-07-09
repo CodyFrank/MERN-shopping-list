@@ -26,14 +26,24 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 app.use('/api/items', items)
 
 // Serve static assets if we are in production
-if(process.env.NODE_ENV === 'production') {
+// if(process.env.NODE_ENV === 'production') {
     // set static folder
-    app.use(express.static('client/build'))
+//     app.use(express.static('client/build'))
 
+//     app.get('*', (req, res) => {
+//         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+//     })
+// }
+
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('client/build'));
+  
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    })
-}
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+  }
 
 // create port
 const port = process.env.PORT ||  5000
