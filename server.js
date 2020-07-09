@@ -13,10 +13,10 @@ const app = express()
 app.use(bodyParser.json())
 
 // db config
-const db = require('./config/keys').mongoURI
+// const db = require('./config/keys').mongoURI
 
 // connect to mongo
-mongoose.connect(process.env.MONGODB_URI || db, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(()=>console.log("connected to mongo"))
     .catch(err=>console.log(err))
 
