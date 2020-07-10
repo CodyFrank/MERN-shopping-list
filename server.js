@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const items = require('./routes/api/items')
 const users = require('./routes/api/users')
+const auth = require('./routes/api/auth')
 const path = require('path')
 const dotenv = require("dotenv");
 const cors = require('cors')
@@ -32,6 +33,7 @@ mongoose.connect(process.env.MONGODB_URI || db, { useNewUrlParser: true, useUnif
 // use routes
 app.use('/api/items', items)
 app.use('/api/users', users)
+app.use('/api/auth', auth)
 
 
 // Serve static assets if in production
