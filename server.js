@@ -39,4 +39,4 @@ if (process.env.NODE_ENV === 'production') {
 // create port
 const port = process.env.PORT ||  5000
 
-app.listen(port, ()=>console.log(`${process.env.MONGODB_URI} server started on ${port}`))
+app.listen(port, ()=>console.log(`server started on ${port}`))
