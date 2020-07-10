@@ -1,24 +1,31 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
 const items = require('./routes/api/items')
 const users = require('./routes/api/users')
 const path = require('path')
 const dotenv = require("dotenv");
 const cors = require('cors')
+const config = require('config')
+
+
 dotenv.config();
+
+const db = config.get('MONGODB_URI')
+
 
 const app = express()
 
 // bodyParser middleware
-app.use(bodyParser.json())
+app.use(express.json())
 
 // CORS
 app.use(cors());
 
 
+
+
 // connect to mongo
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI || db, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(()=>console.log("connected to mongo"))
     .catch(err=>console.log(err))
 
