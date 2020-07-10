@@ -10,10 +10,7 @@ const Item = require('../../models/Item')
 router.get('/', (req, res) => {
     Item.find()
     .sort({ date: -1 })
-        .then(items => {
-            // res.json(items)
-            console.log(JSON.stringify(items))
-        })
+        .then(items => res.json(items))
 })
 
 // @route POST api/items
