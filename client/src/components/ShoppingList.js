@@ -11,7 +11,7 @@ import {
 } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { getItems, deleteItem } from '../actions/itemActions'
-import PropTypes from 'prop-types'
+
 
 
 class ShoppingList extends Component{
@@ -54,9 +54,6 @@ const mapStateToProps = (state) => ({
     item: state.item
 })
 
-ShoppingList.propTypes = {
-    getItems: PropTypes.func.isRequired,
-    item: PropTypes.func.isRequired
-}
+
 
 export default connect(mapStateToProps, { getItems, deleteItem })(ShoppingList)

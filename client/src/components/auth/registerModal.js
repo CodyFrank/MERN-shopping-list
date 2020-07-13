@@ -11,7 +11,8 @@ import {
     NavLink
 } from 'reactstrap'
 import { connect } from 'react-redux'
-import propTypes from 'prop-types'
+import {register} from '../../actions/authAcions'
+
 
 class RegisterModal extends Component {
     state = {
@@ -22,10 +23,7 @@ class RegisterModal extends Component {
         msg: null
     }
 
-    static propTypes = {
-        isAuthenticated: propTypes.bool,
-        error: propTypes.object.isRequired
-    }
+
 
     toggle = () => {
         this.setState({ 
@@ -57,6 +55,7 @@ class RegisterModal extends Component {
                         <FormGroup>
                             <Label for="name">Name</Label>
                             <Input 
+                                className="mb-3"
                                 type="text"
                                 name="name"
                                 id="name"
@@ -67,6 +66,7 @@ class RegisterModal extends Component {
 
                              <Label for="email">Email</Label>
                             <Input 
+                                className="mb-3"
                                 type="email"
                                 name="email"
                                 id="email"
@@ -77,6 +77,7 @@ class RegisterModal extends Component {
 
                              <Label for="password">Password</Label>
                             <Input 
+                                className="mb-3"
                                 type="password"
                                 name="password"
                                 id="password"
@@ -102,4 +103,4 @@ const mapStateToProps = (state) => ({
     error: state.error
 })
 
-export default connect(mapStateToProps, {})(RegisterModal)
+export default connect(mapStateToProps, { regiser })(RegisterModal)
