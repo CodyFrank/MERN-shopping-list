@@ -21,7 +21,7 @@ app.use(cors());
 
 // connect to mongo
 // process.env.MONGODB_URI
-mongoose.connect(config.get('MONGODB_URI'), { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(()=>console.log("connected to mongo"))
     .catch(err=>console.log(err))
 
