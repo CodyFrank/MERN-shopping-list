@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken')
 // user model
 const User = require('../../models/User')
 
-// @route GET /api/users
+// @route POST /api/users
 // @description Register new User
 // @access Public
 router.post('/', (req, res) => {
@@ -57,5 +57,24 @@ router.post('/', (req, res) => {
             })
         })
 })
+
+// @route GET api/users/:id/items
+// @desc gets all items (items index)
+// access public
+router.get('/:id/items', (req, res) => {
+    user = User.findOne({ _id: req.params.id }) 
+    .then( user => user.items)
+    .then( items => res.json(items))
+})
+
+// @route POST api/users/:id/items
+// @desc create a new item
+// access private
+// router.post('/', auth, (req, res) => {
+//     const newItem = new Item({ name: req.body.name })
+//     newItem.save()
+//     .then(item => res.json(item))
+// })
+
 
 module.exports = router
