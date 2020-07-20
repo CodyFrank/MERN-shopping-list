@@ -3,6 +3,7 @@ const router = express.Router()
 const bcrypt = require('bcryptjs')
 const config = require('config')
 const jwt = require('jsonwebtoken')
+const auth = require('../../middleware/auth')
 
 
 // user model
@@ -60,8 +61,8 @@ router.post('/', (req, res) => {
 
 // @route GET api/users/:id/items
 // @desc gets all items (items index)
-// access public
-router.get('/:id/items', (req, res) => {
+// access private
+router.get('/:id/items', auth, (req, res) => {
     user = User.findOne({ _id: req.params.id }) 
     .then( user => user.items)
     .then( items => res.json(items))
@@ -70,11 +71,21 @@ router.get('/:id/items', (req, res) => {
 // @route POST api/users/:id/items
 // @desc create a new item
 // access private
-// router.post('/', auth, (req, res) => {
-//     const newItem = new Item({ name: req.body.name })
-//     newItem.save()
-//     .then(item => res.json(item))
-// })
+router.post('/:id/items', (req, res) => {
+    
+    const newItem = { name: req.body.name }
+    user = User.findOne({ _id: req.params.id })
+    .then(user => {
+    user.items.push(newItem)
+    user.save(err => {
+        user.items
+            .then(items => console.log(items.last))
+    })
+    .then(user => res.json)
+    .catch(err => res.status(400).json(err))
+    })
+    .catch(err => res.status(400).json(err))
+})
 
 
 module.exports = router
