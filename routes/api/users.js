@@ -79,15 +79,35 @@ router.get('/:id/items', auth, (req, res) => {
 // @desc create a new item
 // access private
 router.post('/:id/items', auth, (req, res) => {
-    
-    const newItem = { name: req.body.name }
-    User.findOne({ _id: req.params.id })
-    .then(user => {
-    const i = user.items.push(newItem)
-    user.save()
-    res.json(user.items[i - 1])
-    })
-    .catch(err => res.status(400).json(err))
+    if(req.header('userId') != req.params.id) {
+        res.status(400).json({ msg: "Not Authorized"})
+    }
+    try{
+        const newItem = { name: req.body.name }
+        User.findOne({ _id: req.params.id })
+        .then(user => {
+        const i = user.items.push(newItem)
+        user.save()
+        res.json(user.items[i - 1])
+        })
+    }catch(e){res.status(400).json({ msg: "Failed to add item" })}
+})
+
+// @route Delete api/users/:id/items
+// @desc create a new item
+// access private
+router.delete('/:user_id/items/:item_id', auth, (req, res) => {
+    if(req.header('userId') != req.params.user_id) {
+        res.status(400).json({ msg: "Not Authorized"})
+    }
+        User.findOne({ _id: req.params.user_id })
+        .then(user => {
+        user.items.id(req.params.item_id).remove()
+        user.save()
+        res.json({ success: true })
+        })
+    .catch(e => res.status(404).json({ success: false })
+    )
 })
 
 
