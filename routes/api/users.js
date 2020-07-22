@@ -63,15 +63,22 @@ router.post('/', (req, res) => {
 // @desc gets all items (items index)
 // access private
 router.get('/:id/items', auth, (req, res) => {
-    User.findOne({ _id: req.params.id }) 
-    .then( user => user.items)
-    .then( items => res.json(items))
+    if(req.header('userId') != req.params.id) {
+        res.status(400).json({ msg: "Not Authorized"})
+    }
+    try{
+        User.findOne({ _id: req.params.id }) 
+        .then( user => user.items)
+        .then( items => res.json(items))
+    }catch(e) {
+        res.status(400).json(e)
+    }
 })
 
 // @route POST api/users/:id/items
 // @desc create a new item
 // access private
-router.post('/:id/items', (req, res) => {
+router.post('/:id/items', auth, (req, res) => {
     
     const newItem = { name: req.body.name }
     User.findOne({ _id: req.params.id })
