@@ -65,14 +65,13 @@ router.post('/', (req, res) => {
 router.get('/:id/items', auth, (req, res) => {
     if(req.user.id != req.params.id) {
         res.status(400).json({ msg: "Not Authorized"})
-    }else {
+    }
     try{
         User.findOne({ _id: req.params.id }) 
         .then( user => user.items)
         .then( items => res.json(items))
     }catch(e) {
         res.status(400).json({ msg: "could not retrive items"})
-    }
     }
 })
 

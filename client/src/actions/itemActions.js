@@ -7,7 +7,8 @@ import { returnErrors } from './errorActions'
 
 export const getItems = (user) => (dispatch, getState) => {
     dispatch(setItemsLoading())
-    axios.get(`/api/users/${user._id}/items`, tokenConfig(getState))
+    console.log(user.id)
+    axios.get(`/api/users/${user.id}/items`, tokenConfig(getState))
         .then( res => 
             dispatch({
                 type: GET_ITEMS,
@@ -28,11 +29,11 @@ export const addItem = (item, user) => (dispatch, getState) => {
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
-export const deleteItem = id => (dispatch, getState) => {
-    axios.delete(`/api/items/${id}`, tokenConfig(getState))
+export const deleteItem = (itemId, user)  => (dispatch, getState) => {
+    axios.delete(`/api/users/${user.id}/items/${itemId}`, tokenConfig(getState))
     .then(res => dispatch({
         type: DELETE_ITEM,
-        payload: id
+        payload: itemId
     }))
     .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
