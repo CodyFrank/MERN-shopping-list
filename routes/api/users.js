@@ -63,7 +63,7 @@ router.post('/', (req, res) => {
 // @desc gets all items (items index)
 // access private
 router.get('/:id/items', auth, (req, res) => {
-    user = User.findOne({ _id: req.params.id }) 
+    User.findOne({ _id: req.params.id }) 
     .then( user => user.items)
     .then( items => res.json(items))
 })
@@ -74,15 +74,11 @@ router.get('/:id/items', auth, (req, res) => {
 router.post('/:id/items', (req, res) => {
     
     const newItem = { name: req.body.name }
-    user = User.findOne({ _id: req.params.id })
+    User.findOne({ _id: req.params.id })
     .then(user => {
-    user.items.push(newItem)
-    user.save(err => {
-        user.items
-            .then(items => console.log(items.last))
-    })
-    .then(user => res.json)
-    .catch(err => res.status(400).json(err))
+    const i = user.items.push(newItem)
+    user.save()
+    res.json(user.items[i - 1])
     })
     .catch(err => res.status(400).json(err))
 })
