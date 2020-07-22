@@ -17,7 +17,7 @@ import { getItems, deleteItem } from '../actions/itemActions'
 class ShoppingList extends Component{
 
     componentDidMount(){
-        this.props.getItems()
+        this.props.getItems(this.props.user)
     }
 
     onDeleteClick = (id) => {
@@ -33,12 +33,12 @@ class ShoppingList extends Component{
                     {items.map(({ _id, name }) => (
                         <CSSTransition key={_id} timeout={500} classNames={"fade"}>
                             <ListGroupItem>
-                                { this.props.isAuthenticated ? <Button
+                                <Button
                                  className="remove-btn"
                                  color="danger"
                                  size="sm"
                                  onClick={this.onDeleteClick.bind(this, _id)}
-                                >&times;</Button> : null }
+                                >&times;</Button>
                                 {name}
                             </ListGroupItem>
                         </CSSTransition>
@@ -52,7 +52,8 @@ class ShoppingList extends Component{
 
 const mapStateToProps = (state) => ({
     item: state.item,
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user
 })
 
 

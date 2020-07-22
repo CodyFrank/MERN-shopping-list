@@ -63,15 +63,16 @@ router.post('/', (req, res) => {
 // @desc gets all items (items index)
 // access private
 router.get('/:id/items', auth, (req, res) => {
-    if(req.header('userId') != req.params.id) {
+    if(req.user.id != req.params.id) {
         res.status(400).json({ msg: "Not Authorized"})
-    }
+    }else {
     try{
         User.findOne({ _id: req.params.id }) 
         .then( user => user.items)
         .then( items => res.json(items))
     }catch(e) {
-        res.status(400).json(e)
+        res.status(400).json({ msg: "could not retrive items"})
+    }
     }
 })
 
@@ -94,7 +95,7 @@ router.post('/:id/items', auth, (req, res) => {
 })
 
 // @route Delete api/users/:id/items
-// @desc create a new item
+// @desc delete an item
 // access private
 router.delete('/:user_id/items/:item_id', auth, (req, res) => {
     if(req.header('userId') != req.params.user_id) {

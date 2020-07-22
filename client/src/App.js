@@ -1,10 +1,9 @@
 import React from 'react'
 import AppNavbar from './components/AppNavbar'
-import ShoppingList from './components/ShoppingList'
-import ItemModal from './components/itemModal'
 import { Provider } from 'react-redux'
 import { Container } from 'reactstrap'
 import { loadUser } from './actions/authActions'
+import Home from './components/Home'
 import store from './store'
 import './App.css';
 
@@ -19,8 +18,7 @@ class App extends React.Component {
         <div className="App">
           <AppNavbar />
           <Container>
-            <ItemModal />
-            <ShoppingList />
+            <Home />
           </Container>
         </div>
       </Provider>

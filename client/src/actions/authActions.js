@@ -91,7 +91,7 @@ export const logout = () => {
 export const tokenConfig = getState => { 
         // get token from local storage
         const token = getState().auth.token
-        const userId = getState().auth.user._id
+
 
         // headers
         const config = {
@@ -103,7 +103,6 @@ export const tokenConfig = getState => {
         // if token then add to headers
         if(token) {
             config.headers['x-auth-token'] = token
-            config.headers['userId'] = userId
         }
 
         return config

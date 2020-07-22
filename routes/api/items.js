@@ -12,6 +12,7 @@ router.get('/', (req, res) => {
     Item.find()
     .sort({ date: -1 })
         .then(items => res.json(items))
+        .catch(res.status(400).json({ msg: "could not find itmes"}))
 })
 
 // @route POST api/items
