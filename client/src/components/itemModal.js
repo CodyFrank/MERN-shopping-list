@@ -34,7 +34,7 @@ class ItemModal extends Component {
             name: this.state.name
         }
 
-        this.props.addItem(newItem)
+        this.props.addItem(newItem, this.props.user)
         this.toggle()
     }
 
@@ -79,7 +79,8 @@ class ItemModal extends Component {
 
 const mapStateToProps = (state) => ({
     item: state.item,
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    user: state.auth.user
 })
 
 export default connect(mapStateToProps, { addItem })(ItemModal)

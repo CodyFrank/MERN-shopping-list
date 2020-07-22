@@ -17,8 +17,8 @@ export const getItems = (user) => (dispatch, getState) => {
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
-export const addItem = item => (dispatch, getState) => {
-    axios.post('/api/items', item, tokenConfig(getState))
+export const addItem = (item, user) => (dispatch, getState) => {
+    axios.post(`/api/users/${user.id}/items`, item, tokenConfig(getState))
         .then(res => 
             dispatch({
                 type: ADD_ITEM,
