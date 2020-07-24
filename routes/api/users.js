@@ -86,7 +86,7 @@ router.post('/:id/items', auth, (req, res) => {
         res.status(400).json({ msg: "Not Authorized"})
     }
     try{
-        const newItem = { name: req.body.name }
+        const newItem = { name: req.body.name, department: req.body.department || null}
         User.findOne({ _id: req.params.id })
         .then(user => {
         const i = user.items.push(newItem)

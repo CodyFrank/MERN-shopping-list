@@ -15,7 +15,8 @@ import { addItem } from '../actions/itemActions'
 class ItemModal extends Component {
     state = {
         modal: false, 
-        name: ''
+        name: '',
+        department: ''
     }
 
     toggle = () => {
@@ -31,7 +32,8 @@ class ItemModal extends Component {
     onSubmit = (e) => {
         e.preventDefault()
         const newItem = {
-            name: this.state.name
+            name: this.state.name,
+            department: this.state.department
         }
 
         this.props.addItem(newItem, this.props.user)
@@ -60,7 +62,15 @@ class ItemModal extends Component {
                                 type="text"
                                 name="name"
                                 id="item"
-                                placeholder="Add Shopping Item"
+                                placeholder="Item Name"
+                                onChange={this.onChange}
+                             />
+                            <Label for="department">Department (Optional)</Label>
+                            <Input 
+                                type="text"
+                                name="department"
+                                id="department"
+                                placeholder="Department Name (Optional)"
                                 onChange={this.onChange}
                              />
                              <Button
