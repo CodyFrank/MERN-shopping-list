@@ -19,7 +19,3 @@
     opacity: 0.01;
     transition: opacity 1000ms ease-in;
 }
-
-.App {
-    background-color: grey;
-}
