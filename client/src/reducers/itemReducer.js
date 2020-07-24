@@ -1,4 +1,4 @@
-import { GET_ITEMS, DELETE_ITEM, ADD_ITEM, ITEMS_LOADING } from '../actions/types'
+import { GET_ITEMS, DELETE_ITEM, ADD_ITEM, ITEMS_LOADING, CLEAR_ITEMS } from '../actions/types'
   
   
   
@@ -29,6 +29,11 @@ export default function(state = initialState, action) {
             return {
                 ...state,
                 loading: true
+            }
+        case CLEAR_ITEMS:
+            return{
+                ...state,
+                items: []
             }
         default:
              return state

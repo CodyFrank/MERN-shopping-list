@@ -8,7 +8,8 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     REGISTER_SUCCESS,
-    REGISTER_FAIL
+    REGISTER_FAIL,
+    CLEAR_ITEMS
 } from './types'
 
 //  check token and load user
@@ -82,10 +83,11 @@ export const login = ({ email, password }) => dispatch => {
 
 
 // Logout user
-export const logout = () => {
-    return {
+export const logout = () => dispatch => {
+    dispatch({ type: CLEAR_ITEMS })
+    dispatch( {
         type: LOGOUT_SUCCESS
-    }
+    })
 }
 
 
