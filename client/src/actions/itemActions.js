@@ -7,8 +7,8 @@ import { returnErrors } from './errorActions'
 
 export const getItems = (user) => (dispatch, getState) => {
     dispatch(setItemsLoading())
-    console.log(user.id)
-    axios.get(`/api/users/${user.id}/items`, tokenConfig(getState))
+    console.log(user._id)
+    axios.get(`/api/users/${user._id}/items`, tokenConfig(getState))
         .then( res => 
             dispatch({
                 type: GET_ITEMS,

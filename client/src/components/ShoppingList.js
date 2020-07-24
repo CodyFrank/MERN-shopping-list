@@ -14,9 +14,10 @@ import { getItems, deleteItem } from '../actions/itemActions'
 
 
 
+
 class ShoppingList extends Component{
 
-    componentDidMount(){ 
+    componentDidMount(){
         this.props.getItems(this.props.user)
     }
 

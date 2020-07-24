@@ -30,7 +30,6 @@ router.post('/', (req, res) => {
                     jwt.sign(
                         { id: user.id },
                         process.env.jwtSecret,
-                        // process.env.jwtSecret,
                         { expiresIn: 3600 },
                         (err, token) => {
                             if(err) throw err
@@ -58,6 +57,7 @@ router.get('/user', auth, (req, res) => {
     User.findById(req.user.id)
     .select('-password')
     .then(user => res.json(user))
+    .catch(err => res.status(400).json({ msg: err }))
 })
 
 

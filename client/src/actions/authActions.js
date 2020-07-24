@@ -37,9 +37,9 @@ export const register = ({ name, email, password }) => dispatch => {
             'content-type': 'application/json'
         }
     }
-
     // request body
     const body = JSON.stringify({ name, email, password })
+    dispatch({ type: USER_LOADING })
     axios.post('/api/users', body, config)
         .then(res => dispatch({
             type: REGISTER_SUCCESS,
@@ -61,11 +61,12 @@ export const login = ({ email, password }) => dispatch => {
             'content-type': 'application/json'
         }
     }
-
     // request body
     const body = JSON.stringify({ email, password })
+    dispatch({ type: USER_LOADING })
     axios.post('/api/auth', body, config)
-        .then(res => dispatch({
+        .then(res => 
+            dispatch({
             type: LOGIN_SUCCESS,
             payload: res.data
         }))
