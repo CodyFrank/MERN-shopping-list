@@ -25,8 +25,20 @@ class ShoppingList extends Component{
         this.props.deleteItem(id, this.props.user)
     }
 
+    sortItems = (item) => {
+        return item.items.sort((a, b) => {
+            if (a.department > b.department){
+                return 1
+            }else if(a.department < b.department){
+                return -1
+            }else{
+                return 0
+            }
+        })
+    }
+
     render(){
-        const { items } = this.props.item
+        const items = this.sortItems(this.props.item)
         return (
         <Container>
             <ListGroup>
@@ -40,7 +52,7 @@ class ShoppingList extends Component{
                                  size="sm"
                                  onClick={this.onDeleteClick.bind(this, _id)}
                                 >&times;</Button>
-                                {name} {department} 
+                                {name}<p className='text-right'>{department}</p> 
                             </ListGroupItem>
                         </CSSTransition>
                     ))}

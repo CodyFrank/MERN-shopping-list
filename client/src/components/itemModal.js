@@ -37,6 +37,11 @@ class ItemModal extends Component {
         }
 
         this.props.addItem(newItem, this.props.user)
+        this.setState({
+            ...this.state,
+            name: '',
+            department: '' 
+        })
         this.toggle()
     }
 
