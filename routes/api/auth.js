@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const bcrypt = require('bcryptjs')
-const config = require('config')
 const jwt = require('jsonwebtoken')
 const auth = require('../../middleware/auth')
 
@@ -56,7 +55,7 @@ router.post('/', (req, res) => {
 router.get('/user', auth, (req, res) => {
     User.findById(req.user.id)
     .select('-password')
-    .then(user => res.json(user))
+    .then(user => res.json({ id: user._id, name: user.name, email: user.email }))
     .catch(err => res.status(400).json({ msg: err }))
 })
 

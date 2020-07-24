@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import ShoppingList from './ShoppingList'
 import ItemModel from './ItemModal'
 
+
 class ContentContainer extends React.Component {
     render(){
         return (
