@@ -12,7 +12,10 @@ class ContentContainer extends React.Component {
                 <>
                 <ItemModel />
                 <ShoppingList />
-                </> : null
+                </> : <>
+                <h2 className='text-center'>Welcome to shopping list</h2>
+                <p className='text-center'>Log in or Register to make shopping lists easier!</p>
+                </>
             }
             </>
         )

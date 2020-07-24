@@ -40,8 +40,8 @@ class ShoppingList extends Component{
     render(){
         const items = this.sortItems(this.props.item)
         return (
-        <Container>
-            <ListGroup>
+        <Container className='pb-5'>
+            <ListGroup >
                 <TransitionGroup className="shopping-list">
                     {items.map(({ _id, name, department }) => (
                         <CSSTransition key={_id} timeout={500} classNames={"fade"}>
