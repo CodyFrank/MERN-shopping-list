@@ -13,10 +13,13 @@ const User = require('../../models/User')
 // @description Register new User
 // @access Public
 router.post('/', (req, res) => {
-    const { name, email, password } = req.body
+    const { name, email, password, passwordConfirmation } = req.body
     // simple validation
-    if(!name || !email || !password) {
+    if(!name || !email || !password || !passwordConfirmation) {
         return res.status(400).json({ msg: 'Please enter all fields' })
+    }
+    if(password != passwordConfirmation){
+        return res.status(400).json({ msg: 'Passwords do not match'})
     }
     // check for existing user
     User.findOne({ email }) 

@@ -22,6 +22,7 @@ class RegisterModal extends Component {
         name: '',
         email: '',
         password: '',
+        passwordConfirmation: '',
         msg: null
     }
 
@@ -60,13 +61,14 @@ class RegisterModal extends Component {
     onSubmit = (e) => {
         e.preventDefault()
 
-        const { name, email, password } = this.state
+        const { name, email, password, passwordConfirmation } = this.state
 
         // create user obj
         const newUser = {
             name,
             email,
-            password
+            password,
+            passwordConfirmation
         }
         // attempt to register 
         this.props.register(newUser)
@@ -116,6 +118,15 @@ class RegisterModal extends Component {
                                 type="password"
                                 name="password"
                                 id="password"
+                                placeholder="Password"
+                                onChange={this.onChange}
+                             />
+                            <Label for="passwordConfirmation">Confirm Password</Label>
+                            <Input 
+                                className="mb-3"
+                                type="password"
+                                name="passwordConfirmation"
+                                id="passwordConfirmation"
                                 placeholder="Password"
                                 onChange={this.onChange}
                              />
