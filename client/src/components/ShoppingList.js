@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import {
     Container, 
     ListGroup,
-    ListGroupItem, 
-    Button
 } from 'reactstrap'
 import {
     TransitionGroup,
@@ -11,6 +9,7 @@ import {
 } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { getItems, deleteItem } from '../actions/itemActions'
+import DepartmentContainer from './DepartmentContainer'
 
 
 
@@ -21,41 +20,43 @@ class ShoppingList extends Component{
         this.props.getItems(this.props.user)
     }
 
-    onDeleteClick = (id) => {
-        this.props.deleteItem(id, this.props.user)
+    getDepartments = (items) => {
+        const departments = {}
+        for (const item of items){
+            if (departments[item.department] != item.department){
+                departments[item.department] = []
+                departments[item.department].push(item)
+            }else{
+                departments[item.department].push(item)
+            }
+        }
+        return departments
     }
 
-    sortItems = (item) => {
-        return item.items.sort((a, b) => {
-            if (a.department > b.department){
-                return 1
-            }else if(a.department < b.department){
-                return -1
-            }else{
-                return 0
-            }
-        })
-    }
+    // sortItems = (item) => {
+    //     return item.items.sort((a, b) => {
+    //         if (a.department > b.department){
+    //             return 1
+    //         }else if(a.department < b.department){
+    //             return -1
+    //         }else{
+    //             return 0
+    //         }
+    //     })
+    // }
 
     render(){
-        const items = this.sortItems(this.props.item)
+        const departments = this.getDepartments(this.props.item.items)
         return (
         <Container className='pb-5'>
             <ListGroup >
                 <TransitionGroup className="shopping-list">
-                    {items.map(({ _id, name, department }) => (
-                        <CSSTransition key={_id} timeout={500} classNames={"fade"}>
-                            <ListGroupItem>
-                                <Button
-                                 className="remove-btn"
-                                 color="danger"
-                                 size="sm"
-                                 onClick={this.onDeleteClick.bind(this, _id)}
-                                >&times;</Button>
-                                {name}<p className='text-right'>{department}</p> 
-                            </ListGroupItem>
+                    {console.log(departments)}
+                    {/* {departments.map((department) => (
+                        <CSSTransition key={department.key} timeout={500} classNames={"fade"}>
+                            <DepartmentContainer department={department}/>
                         </CSSTransition>
-                    ))}
+                    ))} */}
                 </TransitionGroup>
             </ListGroup>
         </Container>
