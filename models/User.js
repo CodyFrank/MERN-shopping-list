@@ -7,7 +7,8 @@ const ItemSchema = new Schema({
         required: true
     },
     department: {
-        type: String
+        type: String,
+        default: ""
     },
     date: {
         type: Date,

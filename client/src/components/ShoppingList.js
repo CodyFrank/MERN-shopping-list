@@ -23,16 +23,26 @@ class ShoppingList extends Component{
     getDepartments = (items) => {
         const departments = {}
         for (const item of items){
-            if (departments[item.department] != item.department){
+            if (departments[item.department] !== item.department){
                 departments[item.department] = []
                 departments[item.department].push(item)
             }else{
                 departments[item.department].push(item)
             }
         }
+    
         return departments
     }
-
+    
+    mapDepartments = (departments) => {
+        return Object.keys(departments).map((k, i) => {
+            return <div key={i}>
+            <CSSTransition key={k} timeout={500} classNames={"fade"}>
+                <DepartmentContainer key={`${k}${i}`} name={k} department={departments[k]}/>
+            </CSSTransition>
+            </div>
+        })
+    }
     // sortItems = (item) => {
     //     return item.items.sort((a, b) => {
     //         if (a.department > b.department){
@@ -51,12 +61,7 @@ class ShoppingList extends Component{
         <Container className='pb-5'>
             <ListGroup >
                 <TransitionGroup className="shopping-list">
-                    {console.log(departments)}
-                    {/* {departments.map((department) => (
-                        <CSSTransition key={department.key} timeout={500} classNames={"fade"}>
-                            <DepartmentContainer department={department}/>
-                        </CSSTransition>
-                    ))} */}
+                    {this.mapDepartments(departments)}
                 </TransitionGroup>
             </ListGroup>
         </Container>

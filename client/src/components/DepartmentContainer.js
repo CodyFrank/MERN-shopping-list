@@ -11,9 +11,9 @@ import { deleteItem } from '../actions/itemActions'
 
 class DepartmentContainer extends Component{
 
-    // onDeleteClick = (id) => {
-    //     this.props.deleteItem(id, this.props.user)
-    // }
+    onDeleteClick = (id) => {
+        this.props.deleteItem(id, this.props.user)
+    }
 
     // sortItems = (item) => {
     //     return item.items.sort((a, b) => {
@@ -27,20 +27,24 @@ class DepartmentContainer extends Component{
     //     })
     // }
 
+    // {console.log(this.props.department)}
+
     render(){
         return (
-            <>{console.log(this.props)}</>
-            // <>
-            // <ListGroupItem>
-            //     <Button
-            //      className="remove-btn"
-            //      color="danger"
-            //      size="sm"
-            //      onClick={this.onDeleteClick.bind(this, _id)}
-            //     >&times;</Button>
-            //     {name}<p className='text-right'>{department}</p> 
-            // </ListGroupItem>
-            // </>
+            <>
+            <h4>{this.props.name}</h4>
+            {this.props.department.map((item) => {
+             return <ListGroupItem key={item._id}>
+                <Button
+                 className="remove-btn"
+                 color="danger"
+                 size="sm"
+                 onClick={this.onDeleteClick.bind(this, item._id)}
+                >&times;</Button>
+                {item.name} 
+                </ListGroupItem>
+            })} 
+            </>
         )
     }
 }
