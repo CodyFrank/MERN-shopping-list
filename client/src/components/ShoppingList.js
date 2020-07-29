@@ -1,12 +1,4 @@
 import React, { Component } from 'react'
-import {
-    Container, 
-    ListGroup,
-} from 'reactstrap'
-import {
-    TransitionGroup,
-    CSSTransition
-} from 'react-transition-group'
 import { connect } from 'react-redux'
 import { getItems, deleteItem } from '../actions/itemActions'
 import DepartmentContainer from './DepartmentContainer'
@@ -21,7 +13,6 @@ class ShoppingList extends Component{
     }
 
     getDepartments = (items) => {
-        // console.log(items)
         const departments = {}
         for (const item of items){
             if (departments[item.department]){
@@ -31,41 +22,21 @@ class ShoppingList extends Component{
                 departments[item.department].push(item)
             }
         }
-        console.log(departments)
         return departments
     }
     
     mapDepartments = (departments) => {
         return Object.keys(departments).map((k, i) => {
-            return <div key={i}>
-            <CSSTransition key={k} timeout={500} classNames={"fade"}>
-                <DepartmentContainer key={`${k}${i}`} name={k} department={departments[k]}/>
-            </CSSTransition>
-            </div>
+            return <DepartmentContainer key={k} name={k} department={departments[k]}/>
         })
     }
-    // sortItems = (item) => {
-    //     return item.items.sort((a, b) => {
-    //         if (a.department > b.department){
-    //             return 1
-    //         }else if(a.department < b.department){
-    //             return -1
-    //         }else{
-    //             return 0
-    //         }
-    //     })
-    // }
 
     render(){
         const departments = this.getDepartments(this.props.item.items)
         return (
-        <Container className='pb-5'>
-            <ListGroup >
-                <TransitionGroup className="shopping-list">
-                    {this.mapDepartments(departments)}
-                </TransitionGroup>
-            </ListGroup>
-        </Container>
+            <>
+                {this.mapDepartments(departments)}
+            </>
         )
     }
 }
