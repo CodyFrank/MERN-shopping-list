@@ -6,7 +6,7 @@ import {
     Button
 } from 'reactstrap'
 import { connect } from 'react-redux'
-import { deleteItem, PurchasedItem } from '../actions/itemActions'
+import { deleteItem, purchasedItem } from '../actions/itemActions'
 
 
 
@@ -18,17 +18,17 @@ class DepartmentContainer extends Component{
     }
     
     onPurchasedClick = (id) => {
-        this.props.PurchasedItem(id, this.props.user)
+        this.props.purchasedItem(id, this.props.user)
     }
 
     render(){
         return (
             <Container className='pb-4'>
             <ListGroup >
-            {this.props.name === "null" ? <ListGroupItem active action color="dark"> No Department </ListGroupItem> : <ListGroupItem active action color="dark"> {this.props.name} </ListGroupItem>}
+            {this.props.name === "null" ? <ListGroupItem active action > No Department </ListGroupItem> : <ListGroupItem active action > {this.props.name} </ListGroupItem>}
              {this.props.department.map((item) => {
                 return (
-                <ListGroupItem tag="button" color="dark" onClick={this.onPurchasedClick.bind(this, item._id)} action key={item._id} className="text-left">
+                <ListGroupItem tag="button" onClick={this.onPurchasedClick.bind(this, item._id)} action key={item._id} className="text-left">
                 {item.name}
                 <Button 
                  className="remove-btn float-right "
@@ -48,4 +48,4 @@ class DepartmentContainer extends Component{
 const mapStateToProps = (state) => ({ user: state.auth.user })
 
 
-export default connect(mapStateToProps, { deleteItem, PurchasedItem })(DepartmentContainer)
+export default connect(mapStateToProps, { deleteItem, purchasedItem })(DepartmentContainer)
