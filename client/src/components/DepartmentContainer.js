@@ -5,10 +5,6 @@ import {
     ListGroupItem, 
     Button
 } from 'reactstrap'
-import {
-    CSSTransition,
-    TransitionGroup
-} from 'react-transition-group'
 import { connect } from 'react-redux'
 import { deleteItem } from '../actions/itemActions'
 
@@ -27,10 +23,8 @@ class DepartmentContainer extends Component{
             <Container className='pb-4'>
             <ListGroup >
             {this.props.name === "null" ? <h4>No Department</h4> : <h4>{this.props.name}</h4>}
-            <TransitionGroup key={this.props.name} className="shopping-list">
              {this.props.department.map((item) => {
                 return (
-                <CSSTransition key={item._id} timeout={500} classNames={"fade"}>
                 <ListGroupItem >
                 {item.name}
                 <Button 
@@ -40,10 +34,8 @@ class DepartmentContainer extends Component{
                  onClick={this.onDeleteClick.bind(this, item._id)}
                 >&times;</Button>
                 </ListGroupItem>
-                </CSSTransition>
                 )
             })} 
-            </TransitionGroup>
             </ListGroup>
             </Container>
         )
