@@ -21,16 +21,17 @@ class ShoppingList extends Component{
     }
 
     getDepartments = (items) => {
+        // console.log(items)
         const departments = {}
         for (const item of items){
-            if (departments[item.department] !== item.department){
-                departments[item.department] = []
+            if (departments[item.department]){
                 departments[item.department].push(item)
             }else{
+                departments[item.department] = []
                 departments[item.department].push(item)
             }
         }
-    
+        console.log(departments)
         return departments
     }
     

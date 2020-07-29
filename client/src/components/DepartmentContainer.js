@@ -33,6 +33,7 @@ class DepartmentContainer extends Component{
         return (
             <>
             <h4>{this.props.name}</h4>
+            {/* {this.props.department} */}
             {this.props.department.map((item) => {
              return <ListGroupItem key={item._id}>
                 <Button
