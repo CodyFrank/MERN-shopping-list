@@ -24,26 +24,26 @@ class DepartmentContainer extends Component{
 
     render(){
         return (
-            <Container className='pb-5'>
+            <Container className='pb-4'>
             <ListGroup >
             {this.props.name === "null" ? <h4>No Department</h4> : <h4>{this.props.name}</h4>}
+            <TransitionGroup key={this.props.name} className="shopping-list">
              {this.props.department.map((item) => {
                 return (
-                <TransitionGroup key={item._id} className="shopping-list">
                 <CSSTransition key={item._id} timeout={500} classNames={"fade"}>
                 <ListGroupItem >
                 {item.name}
                 <Button 
-                 className="remove-btn float-right"
+                 className="remove-btn float-right "
                  color="danger"
                  size="sm"
                  onClick={this.onDeleteClick.bind(this, item._id)}
                 >&times;</Button>
                 </ListGroupItem>
                 </CSSTransition>
-                </TransitionGroup>
                 )
             })} 
+            </TransitionGroup>
             </ListGroup>
             </Container>
         )
