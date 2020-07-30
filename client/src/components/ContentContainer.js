@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ShoppingList from './ShoppingList'
-import ItemModal from './ItemModal'
+import ItemModal from './itemModal'
 
 
 class ContentContainer extends React.Component {
