@@ -3,7 +3,8 @@ import {
     Container,
     ListGroup,
     ListGroupItem, 
-    Button
+    Button,
+    ButtonGroup
 } from 'reactstrap'
 import { connect } from 'react-redux'
 import { deleteItem, purchasedItem } from '../actions/itemActions'
@@ -25,22 +26,27 @@ class DepartmentContainer extends Component{
     render(){
         return (
             <Container className='pb-4'>
-            <ListGroup >
-            {this.props.name === "null" ? <ListGroupItem active > No Department </ListGroupItem> : <ListGroupItem active > {this.props.name} </ListGroupItem>}
-             {this.props.department.map((item) => {
-                return (
-                <ListGroupItem tag="button"  onClick={this.onPurchasedClick.bind(this, item)} action key={item._id} className={`text-left ${item.purchased ? "purchased" : ''}`}>
-                {item.name}
-                <Button 
-                 className="remove-btn float-right "
-                 color="danger"
-                 size="sm"
-                 onClick={this.onDeleteClick.bind(this, item._id)}
-                >&times;</Button>
-                </ListGroupItem>
-                )
-            })} 
-            </ListGroup>
+                <ListGroup >
+                    {this.props.name === "null" ? <ListGroupItem active > No Department </ListGroupItem> : <ListGroupItem active > {this.props.name} </ListGroupItem>}
+                    {this.props.department.map((item) => {
+                        return (
+                            <ButtonGroup >
+
+                                <ListGroupItem tag="button" onClick={this.onPurchasedClick.bind(this, item)} action key={item._id} className={`text-left ${item.purchased ? "purchased" : ''}`}>
+                                    {item.name}
+                                </ListGroupItem>
+
+                                <Button 
+                                    className="remove-btn float-right "
+                                    color="danger"
+                                    size="sm"
+                                    onClick={this.onDeleteClick.bind(this, item._id)}
+                                >&times;</Button>
+                                
+                            </ButtonGroup>
+                        )
+                    })} 
+                </ListGroup>
             </Container>
         )
     }
