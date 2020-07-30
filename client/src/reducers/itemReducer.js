@@ -15,12 +15,27 @@ export default function(state = initialState, action) {
             items: action.payload,
             loading: false
         }
+        case UPDATE_ITEM:
+            const actionIndex = state.items.findIndex(e => e._id === action.payload._id)
+            return {
+                ...state,
+                loading: false,
+                items: state.items.map((item, index) => {
+                    if (index !== actionIndex){
+                        return item
+                    }else{
+                        return {
+                            ...item,
+                            ...action.payload
+                        }
+                    }
+                })
+            }
         case DELETE_ITEM:
             return {
                 ...state, 
                 items: state.items.filter(item => item._id !== action.payload)
             }
-        case UPDATE_ITEM:
         case ADD_ITEM:
             return {
                 ...state, 

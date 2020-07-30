@@ -13,8 +13,7 @@ export const getItems = (user) => (dispatch, getState) => {
                 type: GET_ITEMS,
                 payload: res.data
             })
-        )
-        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
+        ).catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
 export const addItem = (item, user) => (dispatch, getState) => {
@@ -23,9 +22,7 @@ export const addItem = (item, user) => (dispatch, getState) => {
             dispatch({
                 type: ADD_ITEM,
                 payload: res.data
-            })
-        )
-        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
+            })).catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
 export const deleteItem = (itemId, user)  => (dispatch, getState) => {
@@ -33,8 +30,7 @@ export const deleteItem = (itemId, user)  => (dispatch, getState) => {
     .then(res => dispatch({
         type: DELETE_ITEM,
         payload: itemId
-    }))
-    .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
+    })).catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
 export const purchasedItem = (item, user) => (dispatch, getState) => {
@@ -42,8 +38,7 @@ export const purchasedItem = (item, user) => (dispatch, getState) => {
     .then(res => dispatch({
         type: UPDATE_ITEM,
         payload: res.data
-    }))
-    .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
+    })).catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
 

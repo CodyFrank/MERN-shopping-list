@@ -68,7 +68,7 @@ router.post('/', (req, res) => {
 router.get('/:id/items', auth, (req, res) => {
     if(req.user.id != req.params.id) {
         res.status(400).json({ msg: "Not Authorized"})
-    }
+    }else{
     try{
         User.findOne({ _id: req.params.id }) 
         .then( user => user.items)
@@ -76,7 +76,7 @@ router.get('/:id/items', auth, (req, res) => {
     }catch(e) {
         res.status(400).json({ msg: "could not retrive items"})
     }
-})
+}})
 
 // @route POST api/users/:id/items
 // @desc create a new item
@@ -84,7 +84,7 @@ router.get('/:id/items', auth, (req, res) => {
 router.post('/:id/items', auth, (req, res) => {
     if(req.user.id != req.params.id) {
         res.status(400).json({ msg: "Not Authorized"})
-    }
+    }else{
     try{
         const newItem = { name: req.body.name, department: req.body.department || null}
         User.findOne({ _id: req.params.id })
@@ -94,7 +94,7 @@ router.post('/:id/items', auth, (req, res) => {
         res.json(user.items[i - 1])
         })
     }catch(e){res.status(400).json({ msg: "Failed to add item" })}
-})
+}})
 
 // @route Delete api/users/:user_id/items/:item_id
 // @desc delete an item
@@ -102,15 +102,14 @@ router.post('/:id/items', auth, (req, res) => {
 router.delete('/:user_id/items/:item_id', auth, (req, res) => {
     if(req.user.id != req.params.user_id) {
         res.status(400).json({ msg: "Not Authorized"})
-    }
+    }else{
         User.findOne({ _id: req.params.user_id })
         .then(user => {
         user.items.id(req.params.item_id).remove()
         user.save()
         res.json({ success: true })
-        })
-    .catch(e => res.status(404).json({ success: false })
-    )
+        }).catch(e => res.status(404).json({ success: false })
+    )}
 })
 
 // @route PATCH api/users/:user_id/items/:item_id

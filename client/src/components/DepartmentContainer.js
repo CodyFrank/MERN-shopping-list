@@ -18,7 +18,7 @@ class DepartmentContainer extends Component{
     }
     
     onPurchasedClick = (item) => {
-        const updatedItem = {...item, purchased: true}
+        const updatedItem = {...item, purchased: !item.purchased}
         this.props.purchasedItem(updatedItem, this.props.user)
     }
 
