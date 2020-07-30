@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ShoppingList from './ShoppingList'
-import ItemModel from './ItemModal'
+import ItemModal from './ItemModal'
 
 
 class ContentContainer extends React.Component {
@@ -10,7 +10,7 @@ class ContentContainer extends React.Component {
             <>
             { this.props.user ? 
                 <>
-                <ItemModel />
+                <ItemModal />
                 <ShoppingList />
                 </> : <>
                 <h2 className='text-center'>Welcome to shopping list</h2>
