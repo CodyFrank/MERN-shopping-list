@@ -1,4 +1,4 @@
-import { GET_ITEMS, DELETE_ITEM, ADD_ITEM, ITEMS_LOADING, CLEAR_ITEMS } from '../actions/types'
+import { GET_ITEMS, DELETE_ITEM, ADD_ITEM, ITEMS_LOADING, CLEAR_ITEMS, UPDATE_ITEM } from '../actions/types'
   
   
   
@@ -20,6 +20,7 @@ export default function(state = initialState, action) {
                 ...state, 
                 items: state.items.filter(item => item._id !== action.payload)
             }
+        case UPDATE_ITEM:
         case ADD_ITEM:
             return {
                 ...state, 

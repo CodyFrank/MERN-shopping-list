@@ -9,6 +9,10 @@ const ItemSchema = new Schema({
     department: {
         type: String
     },
+    purchased: {
+        type: Boolean,
+        default: false
+    },
     date: {
         type: Date,
         default: Date.now

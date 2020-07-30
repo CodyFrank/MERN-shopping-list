@@ -37,8 +37,8 @@ export const deleteItem = (itemId, user)  => (dispatch, getState) => {
     .catch(err => dispatch(returnErrors(err.response.data, err.response.status)))
 }
 
-export const purchasedItem = (itemId, user) => (dispatch, getState) => {
-    axios.patch(`/api/users/${user.id}/items/${itemId}`, tokenConfig(getState))
+export const purchasedItem = (item, user) => (dispatch, getState) => {
+    axios.patch(`/api/users/${user.id}/items/${item._id}`, item, tokenConfig(getState))
     .then(res => dispatch({
         type: UPDATE_ITEM,
         payload: res.data

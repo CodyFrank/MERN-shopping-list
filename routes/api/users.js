@@ -96,7 +96,7 @@ router.post('/:id/items', auth, (req, res) => {
     }catch(e){res.status(400).json({ msg: "Failed to add item" })}
 })
 
-// @route Delete api/users/:id/items
+// @route Delete api/users/:user_id/items/:item_id
 // @desc delete an item
 // access private
 router.delete('/:user_id/items/:item_id', auth, (req, res) => {
@@ -112,6 +112,24 @@ router.delete('/:user_id/items/:item_id', auth, (req, res) => {
     .catch(e => res.status(404).json({ success: false })
     )
 })
+
+// @route PATCH api/users/:user_id/items/:item_id
+// @desc create a new item
+// access private
+router.patch('/:user_id/items/:item_id', auth, (req, res) => {
+    if(req.user.id != req.params.user_id) {
+        res.status(400).json({ msg: "Not Authorized"})
+    }else{
+    try{
+        User.findOne({ _id: req.params.user_id })
+        .then(user => {
+        const item = user.items.id(req.params.item_id)
+        item.purchased = req.body.purchased
+        user.save()
+        res.json(item)
+        })
+    }catch(e){res.status(400).json({ msg: "Failed to add item" })}
+}})
 
 
 module.exports = router
