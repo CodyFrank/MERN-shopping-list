@@ -27,12 +27,15 @@ class DepartmentContainer extends Component{
         return (
             <Container className='pb-4'>
                 <ListGroup >
-                    {this.props.name === "null" ? <ListGroupItem active > No Department </ListGroupItem> : <ListGroupItem active > {this.props.name} </ListGroupItem>}
+                    <ListGroupItem color="dark" >
+                        {this.props.name === "null" ?  "No Department" : `${this.props.name}`}
+                    </ListGroupItem>
+                    
                     {this.props.department.map((item) => {
                         return (
-                            <ButtonGroup >
+                            <ButtonGroup key={item._id} >
 
-                                <ListGroupItem tag="button" onClick={this.onPurchasedClick.bind(this, item)} action key={item._id} className={`text-left ${item.purchased ? "purchased" : ''}`}>
+                                <ListGroupItem tag="button" onClick={this.onPurchasedClick.bind(this, item)} action className={`${item.purchased ? "purchased" : ''}`}>
                                     {item.name}
                                 </ListGroupItem>
 
@@ -42,7 +45,7 @@ class DepartmentContainer extends Component{
                                     size="sm"
                                     onClick={this.onDeleteClick.bind(this, item._id)}
                                 >&times;</Button>
-                                
+
                             </ButtonGroup>
                         )
                     })} 

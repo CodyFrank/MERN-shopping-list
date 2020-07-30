@@ -1,3 +1,4 @@
 button.purchased {
-    background-color: lightgrey;
+    opacity: .4;
+    text-decoration: line-through;
 }
