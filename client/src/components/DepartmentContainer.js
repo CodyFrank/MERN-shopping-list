@@ -26,10 +26,10 @@ class DepartmentContainer extends Component{
         return (
             <Container className='pb-4'>
             <ListGroup >
-            {this.props.name === "null" ? <ListGroupItem active action > No Department </ListGroupItem> : <ListGroupItem active action > {this.props.name} </ListGroupItem>}
+            {this.props.name === "null" ? <ListGroupItem active > No Department </ListGroupItem> : <ListGroupItem active > {this.props.name} </ListGroupItem>}
              {this.props.department.map((item) => {
                 return (
-                <ListGroupItem tag="button" onClick={this.onPurchasedClick.bind(this, item)} action key={item._id} className="text-left">
+                <ListGroupItem tag="button"  onClick={this.onPurchasedClick.bind(this, item)} action key={item._id} className={`text-left ${item.purchased ? "purchased" : ''}`}>
                 {item.name}
                 <Button 
                  className="remove-btn float-right "
