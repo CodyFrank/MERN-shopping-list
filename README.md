@@ -17,3 +17,25 @@ Currently deployed on Heroku at url https://arcane-atoll-75350.herokuapp.com/
 ## Running Servers
 * For development npm run dev from the client folder will use concurrently to run both the client server and the live updating nodemon back-end server. (npm run dev)
 * To run just the backend server use npm start from the root folder (npm start)
+
+## Built with
+* JavaScript
+* React
+* Redux
+* Node.js
+* Express
+* MongoDB
+* Mongoose
+* JSON Web Tokens
+* Bcrypt
+* Bootstrap / React-strap
+* Axios
+
+## Development Tools
+* Postman
+* Nodemon
+* Cuncurrently
+* uuid
+
+## License
+https://github.com/CodyFrank/MERN-shopping-list
